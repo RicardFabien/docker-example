@@ -1,0 +1,22 @@
+version: "3"
+services:
+  back:
+    build: "./backend"
+    ports:
+      - "5000:5000"
+    networks:
+      - back
+      - front
+  redis: 
+    image: "redis:alpine"
+    networks:
+      - back
+
+networks:
+  front: 
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+  back:

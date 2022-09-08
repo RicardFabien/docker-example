@@ -1,17 +1,34 @@
 version: "3"
 services:
-  back:
-    build: "./backend"
+  frontend:
+    build: "./frontend"
+    depends_on:
+      - backend
     ports:
-      - "5000:5000"
+      - "8888:8888"
     networks:
       - back
       - front
-  redis: 
-    image: "redis:alpine"
+  
+  backend:
+    build: "./backend"
+    depends_on:
+      - database
+    networks:
+      - back  
+
+  database:
+    image: mysql
     networks:
       - back
-
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database/names.sql:/docker-entrypoint-initdb.d/dump.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    
 networks:
   front: 
     driver: bridge

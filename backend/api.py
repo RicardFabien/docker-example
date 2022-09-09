@@ -15,7 +15,7 @@ def hello():
     cursor:Cursor = cnx.cursor()
     cursor.execute("SELECT name FROM NAMES where id=1")
 
-    value=cursor.name
+    value=cursor.fetchone()
 
     cursor.close()
     cnx.close()

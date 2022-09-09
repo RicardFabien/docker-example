@@ -5,4 +5,4 @@ COPY / /backend
 WORKDIR /backend/
 
 RUN pip install -r requirements.txt
-CMD python apiStuff.py
+CMD python api.py

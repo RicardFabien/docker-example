@@ -5,6 +5,12 @@ import Home from './Home';
 import About from './About';
 import reportWebVitals from './reportWebVitals';
 
+import {
+  Switch,
+  Route,
+  Link
+} from "react-router";
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -22,7 +28,7 @@ root.render(
           </ul>
         </nav>
 
-    <Switch>
+      <Switch>
           <Route path="/about">
             <About />
           </Route>

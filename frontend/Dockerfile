@@ -1,8 +1,21 @@
-FROM python:3
-EXPOSE 8888
+FROM node:13.12.0-alpine
 
-COPY / /frontend
-WORKDIR /frontend/
+EXPOSE 3000
+WORKDIR /app
 
-RUN pip install -r requirements.txt
-CMD python mainPage.py
+# add `/app/node_modules/.bin` to $PATH
+# Ensures the app runs the node module 
+# and not any other potential executable present in the container
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install
+RUN npm install react-scripts@3.4.1 -g
+
+# add app
+COPY . ./
+
+# start app
+CMD ["npm", "start"]

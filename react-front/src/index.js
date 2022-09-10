@@ -1,3 +1,4 @@
+import './App.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -6,37 +7,38 @@ import About from './About';
 import reportWebVitals from './reportWebVitals';
 
 import {
-  Switch,
+  BrowserRouter as Router,
+  Routes,
   Route,
   Link
-} from "react-router";
+} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
+        <Router>
+          <nav class="navbar">
+              <div>
+                <Link to="/">Home</Link>
+              </div>
+              <div>
+                <Link to="/about">About</Link>
+              </div>
+              <div>
+                <Link to="/users">Users</Link>
+              </div>
+          </nav>
 
-      <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-      </Switch>
+
+          <div id="main">
+            <Routes>
+                <Route path="/about" element={<About />}/>
+                <Route path="/" element={<Home />}/>
+            </Routes>
+          </div>
+        </Router>
   </React.StrictMode>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

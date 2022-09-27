@@ -20,7 +20,7 @@ def hello():
     cursor.close()
     cnx.close()
 
-    return jsonify({"something":value})
+    return jsonify({"name":value})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True,port=80)

@@ -2,6 +2,9 @@ import './App.css';
 import React from "react";
 
 function Home() {
+
+  //await fetch('http://backend:80')
+
   return (
     <div className="App">
       <header className="App-header">

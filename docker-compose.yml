@@ -1,13 +1,27 @@
 version: "3"
 services:
+
+  nginx:
+    build: "./nginx"
+    ports:
+      - "80:80"
+    links: 
+     - frontend:frontend
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - back
+      - front
+
   frontend:
     build: "./frontend"
     depends_on:
       - backend
-    ports:
-      - "3000:3000"
+    # ports:
+    #   - "3000:3000"
     networks:
-      - back
+      # - back
       - front
   
   backend:

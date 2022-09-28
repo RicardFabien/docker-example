@@ -1,21 +1,25 @@
 version: "3"
 services:
 
-  nginx:
-    build: "./nginx"
-    ports:
-      - "80:80"
-    links: 
-     - frontend:frontend
-     - backend:backend
-    depends_on:
-      - backend
-      - frontend
-    networks:
-      - back
+  # nginx:
+  #   build: "./nginx"
+  #   ports:
+  #     - "80:80"
+  #   links: 
+  #    - frontend:frontend
+  #    - backend:backend
+  #   depends_on:
+  #     - backend
+  #     - frontend
+  #   networks:
+  #     - back
 
   frontend:
     build: "./frontend"
+    links: 
+      - backend:backend
+    ports:
+      - "3000:3000"
     depends_on:
       - backend
     networks:
@@ -23,6 +27,8 @@ services:
   
   backend:
     build: "./backend"
+    ports:
+      - "8080:8080"
     depends_on:
       - database
     networks:

@@ -7,22 +7,19 @@ services:
       - "80:80"
     links: 
      - frontend:frontend
+     - backend:backend
     depends_on:
       - backend
       - frontend
     networks:
       - back
-      - front
 
   frontend:
     build: "./frontend"
     depends_on:
       - backend
-    # ports:
-    #   - "3000:3000"
     networks:
-      # - back
-      - front
+      - back
   
   backend:
     build: "./backend"

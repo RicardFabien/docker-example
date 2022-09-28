@@ -10,17 +10,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    cnx = mysql.connector.connect(user='root', password='root',host='database',database ="test")
+    # cnx = mysql.connector.connect(user='root', password='root',host='database',database ="test")
     
-    cursor:Cursor = cnx.cursor()
-    cursor.execute("SELECT name FROM NAMES where id=1")
+    # cursor:Cursor = cnx.cursor()
+    # cursor.execute("SELECT name FROM NAMES where id=1")
 
-    value=cursor.fetchone()
+    # value=cursor.fetchone()
 
-    cursor.close()
-    cnx.close()
+    # cursor.close()
+    # cnx.close()
 
-    return jsonify({"name":value})
+    return jsonify({"name":"value"})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True,port=80)
+    app.run(host="0.0.0.0", debug=True,port=8080)

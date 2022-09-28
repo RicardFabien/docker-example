@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 function About() {
 
@@ -7,7 +7,8 @@ function About() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch('http://backend:80')
+      const result = await fetch("http://backend:8080")
+      console.warn("result",result);
       const jsonResult = await result.json()
 
       setData(jsonResult)

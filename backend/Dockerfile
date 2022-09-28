@@ -1,5 +1,5 @@
 FROM python:3
-EXPOSE 80
+EXPOSE 8080
 
 COPY / /backend
 WORKDIR /backend/

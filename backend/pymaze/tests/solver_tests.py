@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 import unittest
 
-from src.solver import Solver
+frompymaze.src.solver import Solver
 
 
 

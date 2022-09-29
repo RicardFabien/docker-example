@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 import unittest
-from src.cell import Cell
+frompymaze.src.cell import Cell
 
 
 class TestCell(unittest.TestCase):

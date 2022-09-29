@@ -1,8 +1,8 @@
 from __future__ import absolute_import
 import unittest
 
-from src.maze import Maze
-from src.cell import Cell
+frompymaze.src.maze import Maze
+frompymaze.src.cell import Cell
 
 
 def generate_maze():

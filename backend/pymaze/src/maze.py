@@ -2,8 +2,8 @@
 import random
 import math
 import time
-from src.cell import Cell
-from src.algorithm import depth_first_recursive_backtracker, binary_tree
+from pymaze.src.cell import Cell
+from pymaze.src.algorithm import depth_first_recursive_backtracker, binary_tree
 
 
 class Maze(object):

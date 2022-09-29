@@ -3,8 +3,8 @@
 import unittest
 
 # import all algorithms present in algorithm.py
-from src.algorithm import *
-from src.maze import Maze
+frompymaze.src.algorithm import *
+frompymaze.src.maze import Maze
 
 def create_maze(algorithm):
     rows, cols = (5,5)

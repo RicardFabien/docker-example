@@ -1,4 +1,7 @@
 
+import json
+
+
 class Cell(object):
     """Class for representing a cell in a 2D grid.
 
@@ -91,3 +94,7 @@ class Cell(object):
             self.walls["right"] = False
 
         self.is_entry_exit = entry_exit
+
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, 
+            sort_keys=True, indent=4)

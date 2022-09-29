@@ -3,3 +3,4 @@ flask-mysql
 mysql-connector-python
 flask-cors
 matplotlib
+flask-socketio

@@ -1,4 +1,5 @@
 
+import json
 import random
 import math
 import time
@@ -202,3 +203,7 @@ class Maze(object):
             depth_first_recursive_backtracker(self, start_coor)
         elif algorithm == "bin_tree":
             binary_tree(self, start_coor)
+
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, 
+            sort_keys=True, indent=4)

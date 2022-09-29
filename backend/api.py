@@ -10,7 +10,7 @@ import mysql.connector
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
-@app.route('/api')
+@app.route('/')
 @cross_origin(supports_credentials=True)
 def hello():
     cnx = mysql.connector.connect(user='root', password='root',host='database',database ="test")
@@ -23,7 +23,7 @@ def hello():
     cursor.close()
     cnx.close()
 
-    return jsonify({"name":"CORS on"})
+    return jsonify({"name":value})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True,port=8080)

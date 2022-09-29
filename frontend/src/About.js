@@ -7,7 +7,7 @@ function About() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch("https://backend:8080/api",{
+      const result = await fetch("http://localhost:8080",{
         mode: "cors"
       }
       )

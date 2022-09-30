@@ -18,8 +18,12 @@ app.config["SECRET"] = "I'm a secret"
 socket_io = SocketIO(app, cors_allowed_origins="*")
 CORS(app, support_credentials=True)
 
+@socket_io.on("connect")
+def handle_connect(message):
+    send("*hacker voice* I'm in", namespace="init")
+
 @socket_io.on("message")
-def handle_mesage(message):
+def handle_message(message):
     send(message, broadcast=True)
 
 

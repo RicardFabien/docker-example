@@ -1,12 +1,15 @@
 import './App.css';
-import React, { useEffect } from 'react';
+import React, { useEffect,useState  } from 'react';
 import io from 'socket.io-client';
 
 const socket = io("http://localhost:8080");
 
 function About() {
 
-  // const [data, setData] = useState({name: "original"})
+   const [data, setData] = useState([])
+   const [username, setUsername] = useState("")
+   const [comment, setComment] = useState("")
+
 
   useEffect(() => {
 
@@ -15,7 +18,8 @@ function About() {
     });
 
     socket.on('message', (message) => {
-      console.warn("received message", message)
+      setData(d =>[...data, message])
+      console.warn("received message", data)
     });
 
     return () => {
@@ -24,10 +28,10 @@ function About() {
     };
 
     
-  }, [])
+  })
 
   const sendMessage = () => {
-    socket.emit('message', "This is a message");
+    socket.emit('message', {username, comment});
   }
 
   return (
@@ -35,9 +39,33 @@ function About() {
       <header className="About-header">
         About
       </header>
+      
       <p>
-        This is an about of the app.z {/*data.name*/}
+        This is an about of the app
         </p>
+
+        {data.map((item, index) => (
+         <div key={index}>
+          <p>{item.username}: <br/>
+          {item.comment}</p>
+         </div>
+      ))}
+      <input
+        type="text"
+        id="username-input"
+        name="text"
+        autoComplete="off"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <br/>
+      <textarea
+        id="comment-input"
+        name="text"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+      />
+          <br/>
         <button onClick={ sendMessage }>Send ping</button>
     </div>
   );

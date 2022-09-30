@@ -20,8 +20,7 @@ CORS(app, support_credentials=True)
 
 @socket_io.on("message")
 def handle_mesage(message):
-    print("Message received: " + message)
-    send("message", broadcast=True)
+    send(message, broadcast=True)
 
 
 # @app.route('/')

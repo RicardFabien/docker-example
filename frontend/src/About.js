@@ -1,26 +1,34 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import io from 'socket.io-client';
+
+const socket = io("http://localhost:8080");
 
 function About() {
 
-  const [data, setData] = useState({name: "original"})
+  // const [data, setData] = useState({name: "original"})
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch("http://localhost:8080",{
-        mode: "cors"
-      }
-      )
-      console.warn("result",result);
-      const jsonResult = await result.json()
 
-      setData(jsonResult)
-    }
+    socket.on('connect', () => {
+      console.warn("Connected")
+    });
 
-    fetchData()
+    socket.on('message', (message) => {
+      console.warn("received message", message)
+    });
+
+    return () => {
+      socket.off('connect');
+      socket.off('message');
+    };
+
+    
   }, [])
 
-  console.log("-------------------------------------------------", data)
+  const sendMessage = () => {
+    socket.emit('message', "This is a message");
+  }
 
   return (
     <div className="About">
@@ -28,8 +36,9 @@ function About() {
         About
       </header>
       <p>
-        This is an about of the app. {data.name}
+        This is an about of the app.z {/*data.name*/}
         </p>
+        <button onClick={ sendMessage }>Send ping</button>
     </div>
   );
 }

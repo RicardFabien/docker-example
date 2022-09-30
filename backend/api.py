@@ -15,32 +15,35 @@ from pymaze.src.maze import Maze
 
 app = Flask(__name__)
 app.config["SECRET"] = "I'm a secret"
-socket_io = SocketIO(app, cors_allowed_origin = "*")
-# CORS(app, support_credentials=True)
+socket_io = SocketIO(app, cors_allowed_origins="*")
+CORS(app, support_credentials=True)
+
+@socket_io.on("message")
+def handle_mesage(message):
+    print("Message received: " + message)
+    send("message", broadcast=True)
 
 
+# @app.route('/')
+# @cross_origin(supports_credentials=True)
+# def hello():
+#     value = "no database"
 
-
-@app.route('/')
-@cross_origin(supports_credentials=True)
-def hello():
-    value = "no database"
-
-    # cnx = mysql.connector.connect(user='root', password='root',host='database',database ="test")
+#     # cnx = mysql.connector.connect(user='root', password='root',host='database',database ="test")
     
-    # cursor:Cursor = cnx.cursor()
-    # cursor.execute("SELECT name FROM NAMES where id=1")
+#     # cursor:Cursor = cnx.cursor()
+#     # cursor.execute("SELECT name FROM NAMES where id=1")
 
-    # value=cursor.fetchone()
+#     # value=cursor.fetchone()
 
-    # cursor.close()
-    # cnx.close()
+#     # cursor.close()
+#     # cnx.close()
 
-    manager = MazeManager()
-    maze : Maze = manager.add_maze(5, 5)
+#     manager = MazeManager()
+#     maze : Maze = manager.add_maze(5, 5)
 
-    return maze.toJSON()
-    return jsonify({"name":value})
+#     return maze.toJSON()
+#     return jsonify({"name":value})
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True,port=8080)
+    socket_io.run(app,host="0.0.0.0", debug=True,port=8080,allow_unsafe_werkzeug=True)

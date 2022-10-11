@@ -18,35 +18,31 @@ app.config["SECRET"] = "I'm a secret"
 socket_io = SocketIO(app, cors_allowed_origins="*")
 CORS(app, support_credentials=True)
 
+cnx = mysql.connector.connect(user='root', password='root',host='database',database ="test")
+
 @socket_io.on("connect")
 def handle_connect(message):
-    emit("init", "*hacker voice*: I'm in")
+
+    value = "no database"
+
+    cursor:Cursor = cnx.cursor()
+    cursor.execute("SELECT name FROM COMMENT")
+
+    value=cursor.fetchall()
+
+    cursor.close()
+    # cnx.close()
+    emit("init", value)
+
 
 @socket_io.on("message")
 def handle_message(message):
+    cursor:Cursor = cnx.cursor()
+    cursor.execute("insert into COMMENT (username, value) values (%s, %s)",(message.username, message.comment))
+    cursor.close()
+    
     send(message, broadcast=True)
 
-
-# @app.route('/')
-# @cross_origin(supports_credentials=True)
-# def hello():
-#     value = "no database"
-
-#     # cnx = mysql.connector.connect(user='root', password='root',host='database',database ="test")
-    
-#     # cursor:Cursor = cnx.cursor()
-#     # cursor.execute("SELECT name FROM NAMES where id=1")
-
-#     # value=cursor.fetchone()
-
-#     # cursor.close()
-#     # cnx.close()
-
-#     manager = MazeManager()
-#     maze : Maze = manager.add_maze(5, 5)
-
-#     return maze.toJSON()
-#     return jsonify({"name":value})
 
 if __name__ == "__main__":
     socket_io.run(app,host="0.0.0.0", debug=True,port=8080,allow_unsafe_werkzeug=True)

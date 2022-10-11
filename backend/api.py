@@ -6,7 +6,7 @@ from types import SimpleNamespace
 from flask import Flask
 from flask import jsonify
 from flask_cors import CORS, cross_origin
-from flask_socketio import SocketIO,send
+from flask_socketio import SocketIO,emit,send
 import mysql.connector
 
 from pymaze.src.maze_manager import MazeManager
@@ -20,7 +20,7 @@ CORS(app, support_credentials=True)
 
 @socket_io.on("connect")
 def handle_connect(message):
-    send("*hacker voice* I'm in", namespace="init")
+    emit("init", "*hacker voice*: I'm in")
 
 @socket_io.on("message")
 def handle_message(message):

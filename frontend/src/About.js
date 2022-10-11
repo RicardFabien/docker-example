@@ -13,10 +13,6 @@ function About() {
 
   useEffect(() => {
 
-    socket.on('connect', (connectionMessage) => {
-      console.warn("Connected", connectionMessage)
-    });
-
     socket.on('init', (connectionMessage) => {
       console.warn("init", connectionMessage)
     });

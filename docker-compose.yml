@@ -38,8 +38,8 @@ services:
     image: mysql:latest
     networks:
       - back
-    ports:
-      - "3306:3306"
+    # ports:
+    #   - "3306:3306"
     volumes:
       - ./datadb:/var/lib/mysql
       - ./initdb:/docker-entrypoint-initdb.d

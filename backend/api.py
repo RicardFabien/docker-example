@@ -9,19 +9,17 @@ from flask_cors import CORS, cross_origin
 from flask_socketio import SocketIO,emit,send
 import mysql.connector
 
-from pymaze.src.maze_manager import MazeManager
-from pymaze.src.maze import Maze
-
 
 app = Flask(__name__)
 app.config["SECRET"] = "I'm a secret"
 socket_io = SocketIO(app, cors_allowed_origins="*")
 CORS(app, support_credentials=True)
 
-cnx = mysql.connector.connect(user='root', password='root',host='database',database ="test")
 
 @socket_io.on("connect")
 def handle_connect(message):
+
+    cnx = mysql.connector.connect(user='root', password='root',host='database',database ="test")
 
     value = "no database"
 
@@ -31,7 +29,7 @@ def handle_connect(message):
     value=cursor.fetchall()
 
     cursor.close()
-    # cnx.close()
+    cnx.close()
     emit("init", value)
 
 

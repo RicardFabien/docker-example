@@ -15,5 +15,7 @@ Requires: Docker
 - /Backend: contains a flask server that acts as the link between the frontend and the database, with a dockerfile
 - /frontend: contains a react server, with a dockerfile
 - /initdb: contains initialisation files for the database
-- /nginx: contains the configuration files for an nginx reverse proxy
-    
+- /nginx: contains the configuration files for an nginx reverse proxy (en cours de developpement) 
+
+##Notes
+If launched locally, a reload is needed in order to see message coming from the database
